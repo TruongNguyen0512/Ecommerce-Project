@@ -6,7 +6,7 @@ const createUser = asyncHandler(async (req, res) => {
     /**
      * TODO:Get the email from req.body
      */
-    const email = req.body.email;
+    const email = req.body.email;  
     /**
      * TODO:With the help of email find the user exists or not
      */
@@ -43,7 +43,7 @@ const loginUser = asyncHandler(async (req,res) =>{
     }); 
 
   }else {
-    throw new Error("invalid Credentials")
+    throw new Error("invalid Credentials")   
   }
           
 })
@@ -103,6 +103,49 @@ const deleteaUser  =  asyncHandler(async (req,res) =>{
        throw new Error(error)
   }  
 })
-module.exports  = { createUser,loginUser,getallUser ,getaUser,deleteaUser,updateaUser};
+
+const blockUser = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+
+  try {
+    const blockusr = await User.findByIdAndUpdate(
+      id,
+      {
+        isBlocked: true,
+      },
+      {
+        new: true,
+      }
+    );
+    res.json(blockusr);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+const unblockUser = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const unblock = await User.findByIdAndUpdate(
+      id,
+      {
+        isBlocked: false,
+      },
+      {
+        new: true,
+      }
+    );
+    res.json({
+      message: "User UnBlocked",
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+// 
+module.exports  = { createUser,loginUser,getallUser ,getaUser,deleteaUser,updateaUser,blockUser,unblockUser};
 
 
