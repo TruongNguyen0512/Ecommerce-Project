@@ -31,7 +31,11 @@ var userSchema = new mongoose.Schema({
         type : String ,
         default : "user" ,   
     }  , 
-
+    isBlocked : {
+        type :  Boolean , 
+        default :  true  ,
+    } , 
+    
     cart :{
         type: Array,  
         default : []  ,  
@@ -57,4 +61,4 @@ userSchema.methods.isPasswordMatched =  async function(enteredPassword) {
 //Export the model
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+module.exports = User;  

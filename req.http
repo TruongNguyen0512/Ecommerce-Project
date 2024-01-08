@@ -1,2 +1,10 @@
-POST http://lcoalhost:3000/api/user/register  
+POST http://localhost:3000/api/user/register  
 Content-Type: application/json 
+
+{
+    "firstname": "John",
+    "lastname": "Doe",
+    "email": "john@example.com",
+    "mobile" : "1234567890",
+    "password": "password123"
+}
